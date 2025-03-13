@@ -12,14 +12,17 @@ export const connectDB = async () => {
     return;
   }
 
+  console.log(process.env.MONGODB_URI);
+
   try {
     const db = await mongoose.connect(process.env.MONGODB_URI || "");
+
 
     connection.isConnected = db.connections[0].readyState;
 
     console.log("Database connected");
   } catch (error) {
-    console.log("Server Error");
-    process.exit();
+    console.log("Server Error:", error);
+    process.exit(1);
   }
 }

@@ -215,17 +215,17 @@ const alertSchema = new Schema({
 }, { timestamps: true });
 
 // Create models from schemas
-const Camera = mongoose.model('Camera', cameraSchema);
-const Station = mongoose.model('Station', stationSchema);
-const Train = mongoose.model('Train', trainSchema);
-const DetectionEvent = mongoose.model('DetectionEvent', detectionEventSchema);
-const Alert = mongoose.model('Alert', alertSchema);
+const Camera = mongoose.models.Camera || mongoose.model('Camera', cameraSchema);
+const Station = mongoose.models.Station || mongoose.model('Station', stationSchema);
+const Train = mongoose.models.Train || mongoose.model('Train', trainSchema);
+const DetectionEvent = mongoose.models.DetectionEvent || mongoose.model('DetectionEvent', detectionEventSchema);
+const Alert = mongoose.models.Alert || mongoose.model('Alert', alertSchema);
 
-module.exports = {
+
+export {
   Camera,
   Station,
   Train,
   DetectionEvent,
   Alert,
-  SystemLog
 };

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
-import { connectDB } from '@/utils/connectDB';
-import { Camera, DetectionEvent } from '@/models/Rail';
+import  connectToDatabase from '@/lib/db';
+import { Camera, DetectionEvent } from '@/models/schema';
 
 export async function GET(request: NextRequest) {
   try {
-    await connectDB();
+    await connectToDatabase();
     
     const { searchParams } = new URL(request.url);
     const cameraId = searchParams.get('cameraId');
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    await connectDB();
+    await connectToDatabase();
     
     const body = await request.json();
     

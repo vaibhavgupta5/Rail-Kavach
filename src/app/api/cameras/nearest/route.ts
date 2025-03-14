@@ -1,10 +1,10 @@
-import { Camera } from '@/models/Rail';
-import { connectDB } from '@/utils/connectDB';
+import { Camera } from '@/models/schema';
+import { connectToDatabase } from '@/lib/db';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   try {
-    await connectDB();
+    await connectToDatabase();
     
     const { searchParams } = new URL(request.url);
     const longitude = parseFloat(searchParams.get('longitude') || '0');

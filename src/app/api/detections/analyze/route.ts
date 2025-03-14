@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import mongoose from 'mongoose';
-import { connectDB } from '@/utils/connectDB';
-import { Camera } from '@/models/Rail';
+import { connectToDatabase } from '@/lib/db';
+import { Camera } from '@/models/schema';
 
 // Mock function for animal detection analysis - in a real system, this would call an ML service
 async function analyzeImage(imageData: string, cameraContext: any) {
@@ -37,7 +37,7 @@ async function analyzeImage(imageData: string, cameraContext: any) {
 
 export async function POST(request: NextRequest) {
   try {
-    await connectDB();
+    await connectToDatabase();
     
     const body = await request.json();
     const { imageData, cameraId } = body;

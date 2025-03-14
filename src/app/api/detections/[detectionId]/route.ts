@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
-import { connectDB } from "@/utils/connectDB";
-import { Alert, DetectionEvent } from "@/models/Rail";
+import { connectToDatabase } from "@/lib/db";
+import { Alert, DetectionEvent } from "@/models/schema";
 
 export async function GET({ params }: { params: { detectionId: string } }) {
   try {
-    await connectDB();
+    await connectToDatabase();
 
     const { detectionId } = params;
 
@@ -49,7 +49,7 @@ export async function PUT(
   { params }: { params: { detectionId: string } }
 ) {
   try {
-    await connectDB();
+    await connectToDatabase();
 
     const { detectionId } = params;
     const body = await request.json();
